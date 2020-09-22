@@ -1,3 +1,3 @@
 ## solvejs
-### Bumper Stickers
+### Blog
 
