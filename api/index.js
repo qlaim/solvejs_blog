@@ -3,6 +3,9 @@ const { env } = require('process');
 const app = express();
 const port = process.env.PORT || 3030;
 const posts = require('./controllers/blogPosts');
+const dotenv = require('dotenv').config({
+    path: '../.env'
+});
 
 app.use(express.json());
 
@@ -11,6 +14,7 @@ app.use('/api/posts', posts);
 // get posts
 
 app.get('/', (req, res) => {
+    console.log(process.env)
     res.send('hiya, bud!!')
 })
 // get users

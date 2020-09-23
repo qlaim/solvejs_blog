@@ -8,7 +8,7 @@ router.use((req, res, next) => {
 })
 
 router.get('/', (req, res, next) => {
-    console.log(process.env.SOLVEJS_PGUSER, 'process.env');
+    console.log(process.env.SOLVEJS_PGUSER, 'process.env.user_db');
     res.status(200).send({posts}) // move to pg db
 })
 

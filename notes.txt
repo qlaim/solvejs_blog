@@ -1,12 +1,9 @@
 currently work-in-progress before git push:
----- git commit -m '
-
-==--==--==>> check if head split due to git init on folder??
+---- git commit -m 'connect dotenv; started dev postgresql db;
 
 primary:
 
--!! - gitignore re-add after fixing .env saving
-- connect express
+- connect express and react
 - connect postgresql
 --- tables
 ----- alter primary key > posts table
@@ -19,11 +16,14 @@ primary:
 
 secondary:
 
+- page reload to current history and link points to post;
 - adgen > working on generating demo ad from array.length and random based on 2 course categories (javascript and full-stack)
 --- add email form > integrate smtp
 - projects page
 --- spice up natural language and effects
 - ad > fix random showing of 2 or 3 images
+- webpack > separate dev and password
+
 next:
 
 - move ad images to directory for node js count
