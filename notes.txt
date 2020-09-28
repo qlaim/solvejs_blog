@@ -1,34 +1,39 @@
 currently work-in-progress before git push:
----- git commit -m 'connect dotenv; started dev postgresql db;
+---- git commit -m 'postgresql connected to express;
 
-primary:
+CURRENT: PRIORITIZED 3:
+_________________________
 
-- connect express and react
-- connect postgresql
+MUST: 1. connect and configure initial postgresql
 --- tables
------ alter primary key > posts table
+------ posts table > connect to foreign key image @ table images 
 ----- users info; posts; images;
-- .env password storage
+2. connect express and react
+3. REACT page reload | post link to post current history;
+
+OTHERS CURRENT NOT URGENT:
+__________________________
+
 - post > click event on featured image and title
 - images connect
 --- file count images for array random ad
 - add story to website
-
-secondary:
-
-- page reload to current history and link points to post;
-- adgen > working on generating demo ad from array.length and random based on 2 course categories (javascript and full-stack)
 --- add email form > integrate smtp
+- WEBPACK >>> separate dev and password
+
+OTHERS NON-CURRENT NOT URGENT:
+______________________________
+
+- adgen > working on generating demo ad from array.length and random based on 2 course categories (javascript and full-stack)
 - projects page
 --- spice up natural language and effects
 - ad > fix random showing of 2 or 3 images
-- webpack > separate dev and password
-
-next:
-
 - move ad images to directory for node js count
-
 - popup > reposition to middle
+- new content on solvejs blog
+- refactor topic bumpers.solvejs js-related
+
+==========================================
 ==========================================
 layout:
 
