@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import './src/css/reset.css';
-import './src/css/style.css';
-import './src/css/grid-flex.css';
-import App from './src/App';
+import './css/reset.css';
+import './css/style.css';
+import './css/grid-flex.css';
+import App from './App';
 
 ReactDOM.render(
     <App />, document.getElementById('root')

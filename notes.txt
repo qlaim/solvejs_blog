@@ -1,19 +1,27 @@
 currently work-in-progress before git push:
----- git commit -m 'postgresql connected to express;
+---- git commit -m 'usersRouter: get, delete, create for posts & users db; connected react to express via cors & proxy; fixed webpack error related to auto-import of json related to express in a file; separated FE & BE with separate package.json files; moved webpack into client folder;
 
 CURRENT: PRIORITIZED 3:
 _________________________
 
 MUST: 1. connect and configure initial postgresql
 --- tables
------- posts table > connect to foreign key image @ table images 
 ----- users info; posts; images;
-2. connect express and react
+----- set > create table per post if not exists > key: alt of post id?
+comments remove col id uuid > make  comm_tbl_id integer ===> "comments_pkey" PRIMARY KEY, btree (id)
+change for new PK ===> Foreign-key constraints:
+    "fk_posted_to_post" FOREIGN KEY (id) REFERENCES posts(id)
+    ---- change this to auto-create table per post
+    "fk_user_id" FOREIGN KEY (id) REFERENCES users(id)
+2. done: connect express and react
 3. REACT page reload | post link to post current history;
+
 
 OTHERS CURRENT NOT URGENT:
 __________________________
 
+- react : super(props) < determine how to proceed on deprecated warning
+- suppress SQL errors to FE;
 - post > click event on featured image and title
 - images connect
 --- file count images for array random ad
@@ -24,6 +32,7 @@ __________________________
 OTHERS NON-CURRENT NOT URGENT:
 ______________________________
 
+- database and .env backup plan
 - adgen > working on generating demo ad from array.length and random based on 2 course categories (javascript and full-stack)
 - projects page
 --- spice up natural language and effects
@@ -32,6 +41,9 @@ ______________________________
 - popup > reposition to middle
 - new content on solvejs blog
 - refactor topic bumpers.solvejs js-related
+- twitter, disqus comments api to comments table?
+- post creation > select for categories
+- possibly > posts table > connect to foreign key image @ table images
 
 ==========================================
 ==========================================

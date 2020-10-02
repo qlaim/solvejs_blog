@@ -10,6 +10,7 @@ const pool = new Pool({
     database: process.env.SOLVEJS_DB,
     password: process.env.POSTGRES_PASSWORD,
     port: 5432,
+    max: 20
 })
 
 // const client = new Client({

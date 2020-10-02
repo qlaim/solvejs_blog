@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Card from './BlogPostRender';
 import Projects from '../components/Projects';
 import {posts} from '../db/posts';
+import path from 'path'
 
 export default class Blog extends Component {
     constructor(props) {
@@ -19,6 +20,28 @@ handleClick(event) {
     }
     render() {
         let tech = ['JavaScript', 'ReactJS', 'React Router', 'Express', 'Git - version control', 'Webpack [Development]', 'Nodemon [Development]']
+        fetch('http://localhost:3030/api/posts/')
+        .then(res => res.json()) 
+        // problem i had was not letting response complete before attempting to use data
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err, '===> ===> something went wrong'))
+        // function getPosts() { 
+        //     fetch('localhost:3030/api/posts/', {
+        //         method: 'GET',
+        //         credentials: 'same-origin',
+        //         mode: 'cors',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         // body: JSON.stringify(res)
+        //     })
+        //     .then(res => console.log(res))
+        //     .catch(console.log('something went wrong'))
+        //     // console.log(response)
+        //     // .then(res => console.log(res))
+        //     // .catch(console.log('something went wrong'))
+        // }
+        // getPosts();
         return (/* need key for list - move to array */
             <div id="content-wrapper">
                 <div id='card-posts' key={1}>

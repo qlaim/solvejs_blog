@@ -1,9 +1,11 @@
 import React, {Fragment} from 'react';
+import path from 'path';
+import wood from "../../public/images/wood.png"
 
 let posts = [
     {
         title: 'javascript how to use binary search algorithms',
-        image: '../public/images/solution.webp',
+        image: wood,
         full: false,
         text: <Fragment><p>Sed at venenatis orci. Curabitur vel laoreet dolor, eget pharetra eros. Vivamus vitae augue urna. Mauris porttitor turpis sed fringilla molestie. Donec dolor magna, porta et sollicitudin id, laoreet eu dolor. Praesent ac semper lectus. Curabitur luctus nunc vel tortor lacinia ultricies. Maecenas ac varius enim. Nullam placerat lacus id finibus aliquet. Sed sit amet diam mauris. Duis egestas eget lacus eget lobortis.</p>
 
@@ -16,7 +18,7 @@ let posts = [
     },
     {
         title: 'title test title ??',
-        image: '../public/images/door_puzzle.webp',
+        image: '../../public/images/door_puzzle.webp',
         full: false,
         text: <Fragment><p>Nam fringilla sit amet velit a consequat. Maecenas lorem lectus, placerat vitae lectus eget, tempus finibus mauris. Morbi ac enim eget odio molestie tincidunt. Donec vel porta odio. Maecenas at est et velit aliquet ultricies at at tortor. Nullam placerat auctor dui, eget porttitor tellus interdum vitae. Nullam faucibus dolor sed mattis hendrerit. Fusce pellentesque pharetra mi, sit amet vulputate metus sagittis non. Fusce fringilla id risus vel lobortis. Nullam ultrices arcu vel orci accumsan dictum.</p>
         
@@ -29,7 +31,7 @@ let posts = [
     },
     {
         title: 'title test title',
-        image: '../public/images/puzzle_cube.webp',
+        image: '../../public/images/puzzle_cube.webp',
         full: false,
         text: <Fragment><p>Phasellus malesuada metus ultrices blandit ultricies. Aenean lacinia cursus sapien, in bibendum risus feugiat eget. Suspendisse vestibulum odio sit amet gravida mollis. Quisque nulla tortor, rutrum vitae neque non, tempus fermentum eros. Nunc maximus, urna vitae ultricies lacinia, sapien velit fermentum dui, ut faucibus eros libero vitae nisl. Nam bibendum mattis aliquam. Cras non nunc quis nibh maximus interdum ut in sapien. Vivamus eu dui at orci commodo imperdiet at ut leo. Quisque non ante vel tellus faucibus varius vitae ac purus. Aenean viverra sollicitudin ultrices.</p>
 
@@ -40,7 +42,7 @@ let posts = [
     },
     {
         title: 'title test title',
-        image: '../public/images/puzzle_grab.jpg',
+        image: '../../public/images/puzzle_grab.jpg',
         full: false,
         text: <Fragment><p>Curabitur commodo erat at malesuada faucibus. Pellentesque egestas sodales erat sit amet iaculis. Ut nec aliquet nulla. In euismod semper nisl, vitae lobortis elit egestas nec. Phasellus eget nisi molestie, tempor justo quis, luctus elit. Nullam molestie sed leo sit amet accumsan. Cras dictum est neque, vel aliquet nisl suscipit vel. Maecenas eu lorem mi. Praesent purus purus, cursus vel volutpat scelerisque, sollicitudin quis massa. Suspendisse potenti. Donec semper dictum malesuada. Ut interdum dignissim mollis. Ut nulla est, pharetra vel facilisis facilisis, cursus eget est. In lacinia et sapien nec volutpat. Vivamus ut justo non ante dictum bibendum.</p>
         
