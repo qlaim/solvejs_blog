@@ -1,33 +1,40 @@
 currently work-in-progress before git push:
----- git commit -m 'usersRouter: get, delete, create for posts & users db; connected react to express via cors & proxy; fixed webpack error related to auto-import of json related to express in a file; separated FE & BE with separate package.json files; moved webpack into client folder;
+---- git commit -m 'fetch posts working but resolving html vs text and images; images post to fs api working; del at db and fs working; images working api to react; state update on controlled component to page working for blog plan to send to db; working on db send and update of posts state;
 
 CURRENT: PRIORITIZED 3:
 _________________________
 
-MUST: 1. connect and configure initial postgresql
---- tables
------ users info; posts; images;
------ set > create table per post if not exists > key: alt of post id?
-comments remove col id uuid > make  comm_tbl_id integer ===> "comments_pkey" PRIMARY KEY, btree (id)
+MUST: 1. configure postgresql references to fs images
+--- move ad images to directory for node js count
+--- update tables
+----- users and posts editing;
+----- set > create comments table per post if not exists > key: alt of post id?
+----- ===> "comments_pkey" PRIMARY KEY, btree (id)
 change for new PK ===> Foreign-key constraints:
     "fk_posted_to_post" FOREIGN KEY (id) REFERENCES posts(id)
     ---- change this to auto-create table per post
     "fk_user_id" FOREIGN KEY (id) REFERENCES users(id)
-2. done: connect express and react
+2. Development focus on common patterns
+---- initial focus: modules patterns
 3. REACT page reload | post link to post current history;
 
 
 OTHERS CURRENT NOT URGENT:
 __________________________
 
+- var form = new formidable.IncomingForm();
+    // need to refactor to prevent overwriting existing files here > alternatively write function to check db first
+- install morgan logger
 - react : super(props) < determine how to proceed on deprecated warning
+- later: change input fields react to stream with server to change to green if name avail on server
 - suppress SQL errors to FE;
 - post > click event on featured image and title
 - images connect
 --- file count images for array random ad
 - add story to website
+--- spice up natural language and effects
 --- add email form > integrate smtp
-- WEBPACK >>> separate dev and password
+- done: WEBPACK >>> separate dev and password
 
 OTHERS NON-CURRENT NOT URGENT:
 ______________________________
@@ -35,14 +42,12 @@ ______________________________
 - database and .env backup plan
 - adgen > working on generating demo ad from array.length and random based on 2 course categories (javascript and full-stack)
 - projects page
---- spice up natural language and effects
 - ad > fix random showing of 2 or 3 images
-- move ad images to directory for node js count
 - popup > reposition to middle
 - new content on solvejs blog
 - refactor topic bumpers.solvejs js-related
 - twitter, disqus comments api to comments table?
-- post creation > select for categories
+- post creation > select in edit for categories
 - possibly > posts table > connect to foreign key image @ table images
 
 ==========================================

@@ -15,6 +15,7 @@ module.exports = {
     output: {
         filename: '[name].bundle.js', // need to add hash in name
         path: path.join(__dirname, '..', 'dist'),
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -27,4 +28,7 @@ module.exports = {
             ]}
         ]
     },
+    devServer: {
+        historyApiFallback: true
+    }
 }

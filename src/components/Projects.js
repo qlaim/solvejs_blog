@@ -37,7 +37,7 @@ export default function Projects(props) {
     return (
         <div id="web-projects" key={0}>
         {projs.map((x, index) =>
-            <table className="project skills">
+            <table key={index} className="project skills">
                 <SingleProjectLink x={x} ind={index}/>
                 {x.techUsed.map((y, index) =>
                     <tbody key={index} className='technologies'>

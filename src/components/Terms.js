@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Terms() {
-    return text.map(item => <p>{item.para}</p>) 
+    return text.map((item, index) => <p key={index}>{item.para}</p>) 
 }
 
 let text = [

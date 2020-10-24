@@ -2,16 +2,21 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt'); // use async
 router.use(express.json());
+const loginRouter = require('../loginState');
 
 const pool = require('../db/dbconnect')
 
-/* GET USERS */
+router.use((req, res, next) => {
+    console.log('=>USERS<= ROUTER being used')
+    next()
+})
 
-router.get('/:user_id', (req, res) => {
+/* GET USERS */
+router.get('/:email', (req, res) => {
     let usersQuery = {
         // note: needed to remove values($1) since not inserting
-        text: 'SELECT * FROM users WHERE id = $1',
-        values: [`${req.params.user_id}`]
+        text: 'SELECT * FROM users WHERE email = $1',
+        values: [`${req.params.email}`]
     }
         pool.query(usersQuery)
         .then(items => {

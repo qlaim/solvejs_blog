@@ -43,7 +43,7 @@ export default class Card extends Component {
         }
     }
     render() {
-        let replaceSpace = `#${this.props.title.replace(/\?/gi, '').trim().replace(/ /gi, '-')}`;
+        let replaceSpace = `${this.props.title.replace(/\?/gi, '').trim().replace(/ /gi, '-')}`;
         return (
                 <div key={this.props.id} id={this.props.id} className={this.props.activeCard == this.props.id ? 'full-size' : 'card-size'}>
                     <h1 className='title' onClick={this.props.click} ><a href={replaceSpace/* item.title.replace(/ /g, '-') */}>{this.props.title}</a></h1>

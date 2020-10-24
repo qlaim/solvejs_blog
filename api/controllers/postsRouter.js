@@ -1,74 +1,77 @@
 const express = require('express');
-const pool = require('../db/dbconnect');
 const router = express.Router();
-const posts = require('../db/posts');
-const db = process.env.SOLVEJS_DB;
+const dbconnect = require('../db/dbconnect');
+const path = require('path');
 
 router.use((req, res, next) => {
-    console.log('router use at postsRouter.js');
+    console.log('=>POSTS<= ROUTER being used');
     next();
 })
 
 /* GET POSTS */
 
-router.get('/:post_id', (req, res) => {
-    const query_get_posts = {
-        text: `SELECT title, post_id, categories, paragraphs, tbd_comments, post_created, post_updated FROM posts WHERE post_id = ${req.params.post_id}`
+router.get('/:post_id', (req, res, next) => {
+    const {post_id} = req.params;
+    const query_get_post = {
+        text: `SELECT title, post_id, categories, paragraphs, tbd_comments, post_created, post_updated FROM posts WHERE post_id = $1`,
+        values: [`${post_id}`]
     }
-    // console.log(process.env.SOLVEJS_PGUSER, 'process.env.user_db');
-    // res.sendStatus(200).send({posts}) // move to pg db
-    pool.query(`SELECT * FROM posts WHERE post_id = ${req.params.post_id}`).then(result => result.rowCount == 1 ? getQueryPost() : res.sendStatus(404)).catch(err => {console.log(err); res.send('something went wrong.')})
-    function getQueryPost() {
-        pool.query(query_get_posts)
-        .then(result => {
-            console.log(result.rows)
-            // required template string due to node seeing as status code for rowcount total
-            // res.send(`${result.rowCount}`)
-            res.send(result.rows)
-        })
-        .catch(err => {
-            console.log(err);
-            res.sendStatus(404)
-        })
+    dbconnect.query(query_get_post, (err, results) => {
+        if(err) {
+            return next(err)
+        }
+        res.send(results.rows)
     }
-})
+    )})
 
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
     const query_get_posts = {
         // refactor to account for detail not needed in *
-        text: 'SELECT * FROM posts'
+        text: 'SELECT * FROM posts',
+        // values: [*]
     }
     // console.log(process.env.SOLVEJS_PGUSER, 'process.env.user_db');
     // res.sendStatus(200).send({posts}) // move to pg db
-    pool.query(query_get_posts)
-    .then(result => {
-        console.log(result.rows)
-        // required template string due to node seeing as status code for rowcount total
-        // res.send(`${result.rowCount}`)
-        res.json(result.rows)
+    dbconnect.query(query_get_posts, (err, results) => {
+        if(err) {
+            return next(err)
+        }
+        res.send(results.rows)
+    },
+    )
+    // pool.connect((err, client, done) => {
+    //     if(err) throw err;
+    //     client.query(query_get_posts)
+    //     .then(result => {
+    //         console.log(result.rows)
+    //         // required template string due to node seeing as status code for rowcount total
+    //         // res.send(`${result.rowCount}`)
+    //         res.json(result.rows)
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //         res.sendStatus(404).send('something went wrong')
+    //     })
+    // })
     })
-    .catch(err => {
-        console.log(err);
-        res.sendStatus(404).send('something went wrong')
-    })
-})
 
 /* CREATE POST */
 
 // add hash check on creation to ensure no duplicate posts
 // test hash
 
-router.post('/create_post', (req, res) => {
+router.post('/create_post', (req, res, next) => {
     // check if user is admin*****
     const query_create_post = {
-        text: 'INSERT INTO posts (title, categories, paragraphs, post_created) VALUES($1,$2,$3,$4) RETURNING title, post_id',
+        text: 'INSERT INTO posts (title, categories, paragraphs, post_created, images) VALUES($1,$2,$3,$4,$5) RETURNING title, post_id, paragraphs, images',
         // add: function for hash and sanitization to create text/values
         values: [ 
-            '{"New Blog Post Presented As A Test!"}',
+            '"New Blog Post Presented As A Test!"',
             '{"Express JS", "PostgreSQL"}',
-            `{"<p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid voluptatibus modi tenetur <ul>
+            `<p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid voluptatibus modi tenetur 
+            <ul>
                 <li>Lorin ipsum dowe ajit.</li>
                 <li>Pirop dolor sit damet.</li>
                 <li>Kurem ipsum dolor amt.</li>
@@ -79,16 +82,18 @@ router.post('/create_post', (req, res) => {
         </p>
         <p>
             Lorem, ipsum <strong>sit amet consectetur adipisicing elit. Delectus, labore! Porro, </strong> necessitatibus? Iste, enim aut magnam cum adipisci obcaecati, repellendus repellat ea id vero quo sapiente natus animi, quos a!
-        </p>"}`,
-        '{"NOW"}'
+        </p>`,
+        '{"NOW"}',
+        `{'../../db/images/wood.png'}`
         ]
     }
-    pool.query(query_create_post)
-    .then(result => {
-        console.log(result.rows, 'posts result....')
-        res.sendStatus(201).send(result.rows)
+    dbconnect.query(query_create_post, (err, results) => {
+        if(err) {
+            return next(err)
+        }
+            res.send(results.rows)
+        // .catch(err => console.log(err, 'post query did not work'))
     })
-    .catch(err => console.log(err, 'post query did not work'))
 })
 
 /* UPDATE POST */

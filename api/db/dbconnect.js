@@ -1,4 +1,4 @@
-const { Pool, Client } = require('pg');
+const { Pool } = require('pg');
 const path = require('path');
 const dotenv = require('dotenv').config({
     path: path.resolve(__dirname, '../../.env')
@@ -6,29 +6,13 @@ const dotenv = require('dotenv').config({
 
 const pool = new Pool({
     user: process.env.SOLVEJS_PGUSER,
-    host: 'localhost',
+    host: process.env.HOST,
     database: process.env.SOLVEJS_DB,
     password: process.env.POSTGRES_PASSWORD,
     port: 5432,
     max: 20
 })
 
-// const client = new Client({
-//     user: process.env.SOLVEJS_PGUSER,
-//     host: 'localhost',
-//     database: process.env.SOLVEJS_DB,
-//     password: process.env.POSTGRES_PASSWORD,
-//     port: 5432,
-// })
-pool.connect();
-
-pool.query('SELECT 1*1202020202', (err, res) => {
-    if(err) {
-        console.log(err.stack, 'error output')
-    } else {
-        console.log(res.rows, `connected to db: `)
-    }
-})
 
 /* 
 address UUID in db: 
@@ -39,5 +23,8 @@ Connect locally or use SSL connections.
 
 Trust both system and database administrator. */
 // client.end();
-
-module.exports = pool;
+module.exports = {
+    query: (text, callback) => {
+        return pool.query(text, callback)
+    }
+};

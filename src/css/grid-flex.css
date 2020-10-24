@@ -3,6 +3,7 @@
     grid-template-areas:
     "head head head head head head head head head head head head"
     "contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap "
+    "admin admin admin admin admin admin admin admin admin admin admin admin "
     "footer footer footer footer footer footer footer footer footer footer footer footer "
     /* "pop pop pop pop pop pop pop pop pop pop pop " */
 }
@@ -17,6 +18,55 @@ div#header {
 /* #nav-menu {
     grid-area: nav;
 } */
+
+/* Admin Panel begin */
+
+#admin-panel {
+    display: grid;
+    grid-area: admin;
+    grid-template-areas: 
+    "admin-menu"
+    "panel-header"
+    "written-posts"
+    "edit-new"
+    "add-group "
+    "post-create "
+    "send-db";
+}
+#admin-menu {
+    display: grid;
+    grid-area: admin-menu;
+}
+#admin-menu-items {
+    display: flex;
+}
+.edit-new-post {
+    display: grid;
+    grid-area: edit-new;
+}
+.written-posts {
+    display: grid;
+    grid-area: written-posts;
+}
+.add-post-group {
+    display: grid;
+    grid-area: add-group;
+} 
+.post-create {
+    display: grid;
+    grid-area: post-create;
+} 
+#send-edit-state {
+    display: grid;
+    grid-area: send-db;
+}
+.panel-header {
+    display: grid;
+    grid-area: panel-header;
+}
+
+/* Admin Panel end */
+
 #web-projects {
     grid-area: webproj;
     display: flex;

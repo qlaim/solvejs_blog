@@ -1,5 +1,5 @@
 html {
-    background-color: blue;
+    background-color: darkgreen;
 }
 
 /* open: style for mobile screen */
@@ -10,7 +10,8 @@ body {
     width: 90vw;
     min-height: 100vh;
     height: auto;
-    background-color: #f18;
+    background-color: #000;
+    color: whitesmoke;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 /* Header */
@@ -52,6 +53,46 @@ div#header {
     width: 500px;
     margin: 10px;
     float: left;
+}
+
+.solvejs-image {
+    margin: 5px;
+    border: 2px solid white;
+}
+
+/* Forms */
+
+#file_name {
+    width: 200px;
+}
+
+/* Admin > Posts */
+
+#admin-menu button {
+    width: 150px;
+    background-color: red;
+}
+.edit-post-button {
+    height: 40px;
+    border-bottom: 2px solid white;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+.edit-post-button button {
+    float: left;
+}
+input[type='textarea'] {
+    
+    background-color: red;
+    height: auto;
+    overflow: visible;
+    overflow-wrap: normal;
+}
+#send-edit-state {
+    background-color: red;
+    border: 2px solid white;
+    color: gold;
+    font-weight: bolder;
 }
 
 /* Card Layout Content */
