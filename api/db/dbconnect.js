@@ -3,7 +3,6 @@ const path = require('path');
 const dotenv = require('dotenv').config({
     path: path.resolve(__dirname, '../../.env')
 });
-
 const pool = new Pool({
     user: process.env.SOLVEJS_PGUSER,
     host: process.env.HOST,

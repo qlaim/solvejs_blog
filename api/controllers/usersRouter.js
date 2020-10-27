@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt'); // use async
 router.use(express.json());
 const loginRouter = require('../loginState');
 
-const pool = require('../db/dbconnect')
+const dbconnect = require('../db/dbconnect')
 
 router.use((req, res, next) => {
     console.log('=>USERS<= ROUTER being used')
@@ -18,7 +18,7 @@ router.get('/:email', (req, res) => {
         text: 'SELECT * FROM users WHERE email = $1',
         values: [`${req.params.email}`]
     }
-        pool.query(usersQuery)
+        dbconnect.query(usersQuery)
         .then(items => {
             if(items.rowCount === 0) {
                 res.send('User Not Found')
@@ -36,7 +36,7 @@ router.get('/:email', (req, res) => {
 router.get('/', (req, res) => {
     // add db check for user is admin
     let usersQuery = 'SELECT * FROM users';
-        pool.query(usersQuery)
+        dbconnect.query(usersQuery)
         .then(items => res.send(items.rows))
         .catch(err => {
             console.error(err.stack);
@@ -54,23 +54,24 @@ router.post('/create_user', (req, res) => {
     let email;
     let errObj, result;
     let regex = /\^\=[^\=]$/g
-    console.log(req.body, 'role....')
     // router.post('/:email', (req, res) => {
         // add password check and ??timer?? inside db to check session
         // move bcrypt sensitive to .env
         // add timestamp for creation and last update
+    const {...body} = req.body;
+    console.log(body.valueOf(), 'role....')
     let query_add_user_info = {
         text: 'INSERT INTO users (role, first_name, last_name, job_title, email, reading_history, pass_hash) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING job_title, role, first_name',
-        values: [req.body.role, req.body.first_name, req.body.last_name, req.body.job_title, req.body.email, req.body.reading_history || null]
+        values: [body.role, body.first_name, body.last_name, body.job_title, body.email, body.reading_history || null, body.password]
     }
-    pool.query(`SELECT * FROM TABLE users WHERE email = ${req.body.email}`).then(resp => {
-        resp.rowCount == 1 ? res.send(resp.email + ' already exists') : query_create_user()
+    dbconnect.query(`SELECT * FROM users WHERE email = '${body.email}'`).then(resp => {
+        resp.rowCount == 1 ? res.json({"response": `${resp.rows[0].email} already exists`}) : query_create_user()
     })
         .catch(err => {console.log(err); res.sendStatus(400)})
 
     function query_create_user() {
-        pool.query(query_add_user_info)
-        .then(resp => res.send(resp + `User ${req.body.first_name} ${req.body.last_name} with email ${req.body.email} successfully added`)
+        dbconnect.query(query_add_user_info)
+        .then(resp => res.send(resp + `User ${body.first_name} ${body.last_name} with email ${body.email} successfully added`)
         )
         .catch (err => {
             console.log(err, 'errObj....')
@@ -95,7 +96,7 @@ router.delete('/:user_id', (req, res,) => {
         // add if user exists statement
         text: `DELETE FROM users WHERE id = '${router.param.user_id}' RETURNING id;`
     }
-    pool.query(deleted_user)
+    dbconnect.query(deleted_user)
     // add DB query here for name, email
     // add status codes for different issues
     .then(res => console.log(res.rows, 'router.delete...'))

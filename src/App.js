@@ -20,7 +20,7 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: false,
+            loggedIn: true,
             role: 'user', // get from DB
             userID: null, // get from DB
             expires: new Date().setMinutes(new Date().getMinutes()+60), // set to DB value at login
@@ -59,7 +59,7 @@ export default class App extends Component {
     render() {
         console.log(this.state.expires >= Date.now(), 'true or false', this.state.expires)
         return (
-            <Router history={history}>
+            <Router>
             <Header />
             <div className="page-wrapper">
                 <Popup />
@@ -68,6 +68,7 @@ export default class App extends Component {
                 <Route path='/about'><About /></Route>
                 <Route path='/projects'><Projects /></Route>
                 <Route path='/terms'><Terms /></Route>
+        <Route path='/login'>{!this.state.loggedIn ? <Login /> : 'Already logged in.'}</Route>
                 <Route path='/admin-panel'><AdminPanel activeAdmin={this.state.admin}/></Route>
                 </Switch>
                 <Footer />
