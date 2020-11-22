@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {BrowserRouter as Router, Link, Switch, NavLink} from 'react-router-dom';
 
-function Header() {
+function Header(props) {
     const menuLinks = [
         {to: '/', name: 'Home', strict: 'strict', activeItem: null},
     {to: '/projects', name: 'Projects', strict: false, activeItem: null},
     {to: '/goals', name: 'Goals', strict: false, activeItem: null},
     {to: '/about', name: 'About', strict: false, activeItem: null},
-    {to: '/login', name: 'Login', strict: false, activeItem: null},
+    {to: '/login', id: 'logInOut', name: props.loggedIn ? 'Logout' : 'Login', strict: false, activeItem: null},
     {to: '/admin-panel', name: 'Admin', strict: false, activeItem: null},
     
     ];
@@ -22,7 +22,7 @@ function Header() {
         </div>
         <div id='nav-menu'>
             {menuLinks.map(item => 
-                <button key={item.name}><NavLink to={item.to} key={item.name} className='navlink-class' activeStyle={activeStyling} 
+                <button key={item.name}><NavLink to={item.to} key={item.name} className='navlink-class' id={item.id || null} activeStyle={activeStyling} 
                 activeClassName={'active'} strict={item.strict ? true : false} isActive={(match, location) => {if(!match) {return false} else if(location.pathname === item.to) return true}}>{item.name}</NavLink> 
                 </button>
             )}

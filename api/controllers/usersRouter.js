@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt'); // use async
 router.use(express.json());
 const loginRouter = require('../loginState');
 
+const userAccessCheck = require('../helpers/userAccessCheck').userAccessCheck;
+
 const dbconnect = require('../db/dbconnect')
 
 router.use((req, res, next) => {
@@ -12,6 +14,23 @@ router.use((req, res, next) => {
 })
 
 /* GET USERS */
+router.get('/test', (req, res) => {
+    // will use to prevent unauth changes from admin panel
+
+    async function access() {
+        return await userAccessCheck('d646dade-21c7-486e-a8ee-9add957230d7');
+        // return access2;
+        // res.send(access3)
+        // console.log(access3, 'access 3')
+    }
+    async function sendAccess() {
+        let result = await access();
+        console.log(result, 'result sendaccess')
+        res.send(result);
+    }
+    sendAccess().catch(err => err);
+})
+
 router.get('/:email', (req, res) => {
     let usersQuery = {
         // note: needed to remove values($1) since not inserting
@@ -33,8 +52,10 @@ router.get('/:email', (req, res) => {
         })
     })
 
+
 router.get('/', (req, res) => {
     // add db check for user is admin
+
     let usersQuery = 'SELECT * FROM users';
         dbconnect.query(usersQuery)
         .then(items => res.send(items.rows))

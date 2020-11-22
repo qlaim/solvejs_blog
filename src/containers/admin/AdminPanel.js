@@ -12,10 +12,11 @@ import Login from '../../components/Login';
 
 export default class AdminPanel extends Component {
     constructor(props) {
-        super();
+        super(props);
         this.state = {
-            // userRole: 'user',
-            panel_on: '',
+            // activeAdmin: false,
+            // role: null,
+            // expires: null
         }
         // this.hideAdmin = this.hideAdmin.bind(this);
     }
@@ -23,16 +24,42 @@ export default class AdminPanel extends Component {
         //     this.props.activeAdmin ? this.setState({panel_on: ''}) : 
         //     this.setState({panel_on: 'none'})}
             
-    componentDidMount() {
-        // this.hideAdmin(); not needed > used ternary operator in return
-    }
+    // componentDidUpdate() {
+    //     this.setState({
+    //         activeAdmin: this.props.activeAdmin,
+    //         role: this.props.role
+    //     })
+    //     // this.hideAdmin(); not needed > used ternary operator in return
+    // }
     componentWillUnmount() {
         () => AbortController.abort(); //abort fetch to prevent uncontrolled comp error
     }
+    componentDidMount() {
+        this.setState({
+            activeAdmin: this.props.activeAdmin,
+            role: this.props.role,
+            expires: this.props.expires,
+            loggedIn: this.props.loggedIn
+        })
+    }
+    // handleAccess()  {
+    //     // window.sessionStorage.removeItem('data');
+    //     if(this.state.activeAdmin && this.state.role === 'admin' && this.state.expires > new Date().toISOString()) {
+    //         () => this.setState({
+    //             activeAdmin: this.props.activeAdmin,
+    //             loggedIn: this.props.loggedIn,
+    //             role: this.props.role
+    //         })
+    //     } else if(this.state.loggedIn && this.state.expires > new Date().toISOString()) {
+    //         // later: convert func to server Login
+    //         return `Your user role on this site is ${this.state.role}. Please log in as an admin to see this page.`
+    //     } else {
+    //     }
+    // }
     render() {
     return (
-        this.props.activeAdmin ?
-        <div id='admin-panel' style={{display: this.state.panel_on}}>
+        /* this.state.activeAdmin && this.state.expires > new Date().toISOString() ? */
+        <div id='admin-panel'>
         <AdminMenu />
         <Switch> 
         {/* renamed to comp for error should not use <Route component> and <Route children> in the same router */}
@@ -51,7 +78,7 @@ export default class AdminPanel extends Component {
         )
         </Switch>
         </div>
-        : <Login message='You will need to be admin to access this area. Please login with the proper credentials to see this page.'/> 
+        /* : <Login message='You will need to be admin to access this area. Please login with the proper credentials to see this page.' loginPassUpState={this.props.loginPassUpState} /> */ 
         /* ADD CHECK FOR USERS LOGGED IN TERNARY HERE FOR REG VS LOGIN */
       
         )}

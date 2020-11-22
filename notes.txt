@@ -1,10 +1,12 @@
 currently work-in-progress before git push:
----- git commit -m 'fetch posts working but resolving html vs text and images; images post to fs api working; del at db and fs working; images working api to react; state update on controlled component to page working for blog plan to send to db; working on db send and update of posts state;
+---- git commit -m 'fetch posts working but resolving html vs text and images; images post to fs api working; del at db and fs working; images working api to react; state update on controlled component to page working for blog plan to send to db; working on db send and update of posts state; login working with settimeout; 
 
 CURRENT: PRIORITIZED 3:
 _________________________
+>>>>>> still resolving useraccesscheck to db issue >> saved pre-vacation
 
 MUST: 1. configure postgresql references to fs images
+--- posts editing and posts creation from db strings;
 --- move ad images to directory for node js count
 --- update tables
 ----- users and posts editing;
@@ -16,8 +18,10 @@ change for new PK ===> Foreign-key constraints:
     "fk_user_id" FOREIGN KEY (id) REFERENCES users(id)
 2. Development focus on common patterns
 ---- initial focus: modules patterns
-3. REACT page reload | post link to post current history;
-
+3. MISSING IMPORTANT:
+--- password mask to db query
+--- comments area login prompt (set timeout check on page reentry - does not logout if computer sleep)
+----- facebook & twitter integration
 
 OTHERS CURRENT NOT URGENT:
 __________________________
@@ -25,7 +29,6 @@ __________________________
 - var form = new formidable.IncomingForm();
     // need to refactor to prevent overwriting existing files here > alternatively write function to check db first
 - install morgan logger
-- react : super(props) < determine how to proceed on deprecated warning
 - later: change input fields react to stream with server to change to green if name avail on server
 - suppress SQL errors to FE;
 - post > click event on featured image and title

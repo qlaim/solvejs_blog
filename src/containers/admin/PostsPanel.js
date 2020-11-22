@@ -10,8 +10,8 @@ export default class PostsPanel extends Component {
             // need false in db, also
             // will also need to move all code to individual posts
             posts: [],
-            tmpParagraphs: ['**LOCALSTORAGE FOR TEMP IN CASE OF REFRESH', '**BUTTON: SEND TO DATABASE', '**EDIT BUTTON THAT UPDATES STATE INDEX ON SEND'],
-            paragraphs: ['**LOCALSTORAGE FOR TEMP IN CASE OF REFRESH', '**BUTTON: SEND TO DATABASE', '**EDIT BUTTON THAT UPDATES STATE INDEX ON SEND'],
+            tmpParagraphs: ['**sessionStorage FOR TEMP IN CASE OF REFRESH', '**BUTTON: SEND TO DATABASE', '**EDIT BUTTON THAT UPDATES STATE INDEX ON SEND'],
+            paragraphs: ['**sessionStorage FOR TEMP IN CASE OF REFRESH', '**BUTTON: SEND TO DATABASE', '**EDIT BUTTON THAT UPDATES STATE INDEX ON SEND'],
             tmpCode: [],
             code: [],
             images: []
@@ -85,7 +85,7 @@ export default class PostsPanel extends Component {
             <div key='lkj' className='panel-header'>Posts Panel</div>
             <div className='written-posts'>
             {this.state.posts ? this.state.posts.map(item =>
-                <div>
+                <div key={item.post_id + 1}>
                 <div key={item.post_id}>
                 <span key={item.post_id}>{item.title}</span>
                 <span key='tttt'>{item.post_created}</span>
@@ -127,7 +127,7 @@ function TextBlock(props) {
         <div className='post-create'>
         <form action='' name='text-block' onChange={props.handleChangeParagraph}>
         <label htmlFor='paragraph'>Enter Paragraph</label><textarea cols='100%' rows='auto' name='paragraph'></textarea>
-        <input type='button' onClick={(e) => props.createPara(e)} value='Send: State & LocalStorage' />
+        <input type='button' onClick={(e) => props.createPara(e)} value='Send: State & sessionStorage' />
         </form>
         <Images />
         <CodeBlock handleValChange={props.handleValChange}/>
