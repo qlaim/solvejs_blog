@@ -5,30 +5,33 @@ const db = require('../db/dbconnect');
 // step 3: use hash with email for userAccessCheck
 
 module.exports = {
-    userAccessCheck: async function(ID, hash) {
+    userAccessCheck: function(ID, hash, callback) {
         // use to check before db updates
-        
-    let query_hash_pass = {
-        text: 'SELECT * FROM users WHERE id = $1',
-        values: [`${ID}`]
-    }
-    return await sendIt();
-    async function sendIt() {
-        // problem here with db call
-        
-        // async function accessresp() {
-           return db.query(query_hash_pass, (err, results) => {
-                        if(err) err;
-                        return results.rows[0];
-                    })
-                    return insideDB;
-                }
-                // return accessresp()
-        // return accessresp + ' << returning';
-        // let endResult = await accessresp();
-        // return accessresp()
-    // }
-    return await sendIt();
-    // .catch(err => err)
+        // dbResult(); // start db pull
+        let inside = 'nothing';
+        let query_hash_pass = {
+            text: 'SELECT * FROM users WHERE id = $1',
+            values: [`${ID}`]
+        }
+        let q = async () => 
+        items = await db.query(query_hash_pass, (err, results) => {
+            if(err) err;
+            // console.log('>>>>>', results.rows[0]);
+            inside = 'inside query';
+            console.log(inside, 'inside db.query');
+            return results ? results.rows : 'nothing';
+        });
+        // let r = q();
+        console.log('q().then(val => val)', 'inside');
+            return q() + ' returned'
+        // let sendIt = new Promise((resolve, reject) => {
+        //     resolve(db.query(query_hash_pass, (err, results) => {
+        //         if(err) err; 
+        //         console.log('>>>>>', results.rows[0]);
+        //         return results.rows;
+        //     }));
+        //     reject('nothing returned')
+        // });
+        // return sendIt.then(val => val);
     }
 };

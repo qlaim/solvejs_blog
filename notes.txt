@@ -1,9 +1,10 @@
 currently work-in-progress before git push:
----- git commit -m 'fetch posts working but resolving html vs text and images; images post to fs api working; del at db and fs working; images working api to react; state update on controlled component to page working for blog plan to send to db; working on db send and update of posts state; login working with settimeout; 
+
+----> git commit -m 'fix height issue #content-wrapper to display right after #header; router.get('/test'... working but need to move to access();'
 
 CURRENT: PRIORITIZED 3:
 _________________________
->>>>>> still resolving useraccesscheck to db issue >> saved pre-vacation
+>>>>>> useraccesscheck result to works with adding directly to users router js file >> still want to get it working in its file
 
 MUST: 1. configure postgresql references to fs images
 --- posts editing and posts creation from db strings;
@@ -26,8 +27,7 @@ change for new PK ===> Foreign-key constraints:
 OTHERS CURRENT NOT URGENT:
 __________________________
 
-- var form = new formidable.IncomingForm();
-    // need to refactor to prevent overwriting existing files here > alternatively write function to check db first
+- my conventions > CONST, file_names, css-properties, html-values,
 - install morgan logger
 - later: change input fields react to stream with server to change to green if name avail on server
 - suppress SQL errors to FE;

@@ -51,7 +51,7 @@ export default class App extends Component {
             return true
         }
     }
-    loginPassUpState(obj) {
+    loginPassUpState(obj) { 
         console.log(obj, 'obj ... obj')
         const data = {
             userID: obj.id || null,
@@ -116,8 +116,6 @@ export default class App extends Component {
         
         this.timerDone >=0 ? window.setTimeout(this.logoutTriggered, this.timerDone) : null;
         
-        console.log(this.timerDone, '<<< `e(xpires) destructured `')
-        
         sessionStorage.getItem('data') && expires > new Date().toISOString() ? this.setState(JSON.parse(sessionStorage.getItem('data'))) : this.logoutTriggered()    
 
         /* (sessionStorage.getItem('data') == null || undefined) || JSON.parse(sessionStorage.getItem('data')).expires < new Date().toISOString() ? this.logoutTriggered() : this.setState(JSON.parse(sessionStorage.getItem('data'))); */
@@ -134,7 +132,7 @@ export default class App extends Component {
         return (
             <Router>
             <Header loggedIn={this.state.data.loggedIn}/>
-            <div className="page-wrapper">
+            <div id="page-wrapper" style={{backgroundColor: 'red'}}>
             <Popup />
             <Switch>
                 <Route path='/' exact><Blog loggedIn={this.state.data.loggedIn}/></Route>
@@ -156,8 +154,8 @@ export default class App extends Component {
                 </Route>
                 {/* <Route path='/admin-panel'><AdminPanel activeAdmin={this.state.data.admin} role={this.state.data.role || null} loginPassUpState={this.loginPassUpState} expires={this.state.data.expires}/></Route> */}
             </Switch> 
-                <Footer />
             </div>
+                <Footer />
             </Router>
         )
     }

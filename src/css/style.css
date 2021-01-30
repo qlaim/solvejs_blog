@@ -151,9 +151,10 @@ span.author-bio {
     font-style: italic;
     color: rgb(0, 181, 255);
 }
-.page-wrapper {
+ #page-wrapper {
     margin-top: 70px; /* moved page to wrapper for header 70px adjustment */
-}
+    width: 90vw;
+} 
 
 /* Forms */
 form input, label {

@@ -14,21 +14,57 @@ router.use((req, res, next) => {
 })
 
 /* GET USERS */
-router.get('/test', (req, res) => {
+router.get('/test', async (req, res) => {
     // will use to prevent unauth changes from admin panel
-
-    async function access() {
-        return await userAccessCheck('d646dade-21c7-486e-a8ee-9add957230d7');
-        // return access2;
+    // fix and move call to useraccesscheck.js
+    let query_hash_pass = {
+        text: 'SELECT * FROM users WHERE id = $1',
+        values: ['d646dade-21c7-486e-a8ee-9add957230d7']
+    }
+    dbconnect.query(query_hash_pass, (err, results) => {
+        if(err) err;
+        res.send(results.rows[0])
+    })
+    // let items = (async function(ID, hash) {
+    //     // use to check before db updates
+    //     // dbResult(); // start db pull
+    //     let inside = 'nothing';
+    //     let query_hash_pass = {
+    //         text: 'SELECT * FROM users WHERE id = $1',
+    //         values: [`${ID}`]
+    //     }
+    //     dbconnect.query(query_hash_pass, (err, results) => {
+    //         if(err) err;
+    //         // console.log('>>>>>', results.rows[0]);
+    //         inside = 'inside query';
+    //         console.log(inside, 'inside db.query');
+    //         results ? results.rows : 'nothing';
+    //         });
+    //         // return result + ' ... ';
+    //     })()
+    //     res.send(items + ' items')
+            
+    // let that = new Promise((resolve, reject) => {
+    //     resolve(userAccessCheck('d646dade-21c7-486e-a8ee-9add957230d7'));
+    //     reject('did not return')
+    // });
+    // userAccessCheck('d646dade-21c7-486e-a8ee-9add957230d7');
+    // console.log(that, 'that');
+    // let other = Promise.all()
+    // res.send(that)
+    /* let end = (function access() {
+        userAccessCheck('d646dade-21c7-486e-a8ee-9add957230d7');
         // res.send(access3)
         // console.log(access3, 'access 3')
+    })()
+    function sendAccess() {
+        // let test = userAccessCheck('d646dade-21c7-486e-a8ee-9add957230d7');
+        // let result = await access();
+        console.log(end, 'end')
+        res.send(end + ' test');
     }
-    async function sendAccess() {
-        let result = await access();
-        console.log(result, 'result sendaccess')
-        res.send(result);
-    }
-    sendAccess().catch(err => err);
+    sendAccess();
+    console.log('end of sendAccess()'); */
 })
 
 router.get('/:email', (req, res) => {
