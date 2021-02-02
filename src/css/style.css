@@ -12,6 +12,7 @@ body {
     height: auto;
     background-color: #000;
     color: whitesmoke;
+    font-size: 16px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 /* Header */
@@ -80,6 +81,26 @@ div#header {
 }
 .edit-post-button button {
     float: left;
+}
+.warning {
+    color: red;
+    font-weight: bolder;
+    background-color: yellow;
+    border: 2px solid black;
+}
+.live-posts {
+    background-color: black;
+    align-items: flex-start;
+}
+.single-post {
+    background-color: green;
+    display: flex;
+    width: 33%;
+    height: 100px;
+    margin: 5px auto 5px;
+}
+.single-post-max-size {
+    flex-basis: max-content;
 }
 input[type='textarea'] {
     

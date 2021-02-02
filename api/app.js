@@ -22,8 +22,8 @@ const pool = new Pool(dbConfigs)
 
 app.use((req, res, next) => {
     pool.on('error', (err, client) => {
-    console.error(`Error occurred: ${err.stack}`)
-    process.exit(-1)
+    console.error(`Error occurred: ${err.stack}`);
+    process.exit(-1);
 })
 next();
 })

@@ -30,7 +30,7 @@ const checkFileName = (function() {
             // let check = await this.checkExists(fileToCheck, arrOfFiles);
             // return check;
             },
-        checkExists: function(fileToCheck, arr) {
+        checkExists: async function(fileToCheck, arr) {
             console.log('checking file now...', fileToCheck)
             updateFilesArr(); // re-run to update array
             return arr.includes(fileToCheck) ? 

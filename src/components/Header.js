@@ -14,7 +14,7 @@ function Header(props) {
     const activeStyling=
     {backgroundColor: '#73817C', color: 'black', fontWeight: 'bold'}
     return (
-        <div id='header' style={{width: '90vw', margin: 'auto', position: 'fixed', top: 0, left: 'auto', height: '90px', backgroundColor: 'orange', color: '#00b5ff', lineHeight: '100%', fontSize: '2em'}}>
+        <div id='header' style={{width: '90vw', margin: 'auto', position: 'fixed', top: 0, left: 'auto', backgroundColor: 'orange', color: '#00b5ff', lineHeight: '100%', fontSize: '2em'}}>
         <div className='header-text'>
             <a href='/'>
                 <h1 style={{width: 'max-content', margin: 'auto'}}><span style={{color: 'black'}}>&lt;</span>S o l v e J S <span style={{color: 'black'}}>&#47;&gt;</span> Learning Past Yet</h1>

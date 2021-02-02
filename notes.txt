@@ -1,6 +1,6 @@
 currently work-in-progress before git push:
 
-----> git commit -m 'fix height issue #content-wrapper to display right after #header; router.get('/test'... working but need to move to access();'
+----> git commit -m 'postspanel create SinglePost for each post > onclick for post edit button resize to full; Header remove 90px height in favor of auto to accommodate components following; styling post & edit buttons AdminPanel'
 
 CURRENT: PRIORITIZED 3:
 _________________________

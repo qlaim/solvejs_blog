@@ -1,5 +1,6 @@
 import React, { Component, Fragment, useState } from 'react';
 import hocPost from './hocPost';
+import SinglePost, {SinglePostFullSize} from '../../components/SinglePost';
 
 export default class PostsPanel extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class PostsPanel extends Component {
             // need false in db, also
             // will also need to move all code to individual posts
             posts: [],
+            activePost: 76,
             tmpParagraphs: ['**sessionStorage FOR TEMP IN CASE OF REFRESH', '**BUTTON: SEND TO DATABASE', '**EDIT BUTTON THAT UPDATES STATE INDEX ON SEND'],
             paragraphs: ['**sessionStorage FOR TEMP IN CASE OF REFRESH', '**BUTTON: SEND TO DATABASE', '**EDIT BUTTON THAT UPDATES STATE INDEX ON SEND'],
             tmpCode: [],
@@ -43,13 +45,30 @@ export default class PostsPanel extends Component {
         {/* <TextBlock handleChangeParagraph={handleChangeParagraph}/> */} 
     }
     editParagraph(e, num) {
-        let eHold = e.target.parentNode.querySelector(name='textarea').innerHTML;
-        let tmpArr = [...this.state.paragraphs];
-        tmpArr.splice(num, 1, this.state.tmpParagraphs[num]);
-        this.setState({
-             paragraphs: tmpArr
-        });
-        console.log('should have updated state...')
+        // e.target.parentNode.parentNode.classList.toggle('single-post-max-size');
+        console.log(e.target.innerText, e.target);
+        if(e.target.innerText === 'Edit Post') {
+            this.setState({
+                activePost: num
+            });
+            console.log(e.target.innerText);
+            e.target.innerText = 'Cancel';
+            console.log(e.target.innerText);
+        } else if(e.target.innerText === 'Cancel') {
+            this.setState({
+                activePost: 0
+            });
+            console.log(e.target.innerText);
+            e.target.innerText = 'Edit Post';
+            console.log(e.target.innerText);
+        }
+        // let eHold = e.target.parentNode.querySelector(name='textarea').innerText;
+        // let tmpArr = [...this.state.paragraphs];
+        // tmpArr.splice(num, 1, this.state.tmpParagraphs[num]);
+        // this.setState({
+        //      paragraphs: tmpArr
+        // });
+        // console.log('should have updated state...')
     }
     handleValChange = (e, num) => {
         // generic function for all onchange
@@ -57,7 +76,7 @@ export default class PostsPanel extends Component {
     handleChangeParagraph = (e) => {
         let eHolder = new String(e.target.value);
         let textVal = e.target.parentNode.querySelector('textarea').value;
-        let buttonNumValue = e.target.parentNode.querySelector('button').lastChild.textContent;
+        let buttonNumValue = e.target.parentNode.querySelector('button').lastChild.innerText;
         let tmpArr = [...this.state.tmpParagraphs];
         tmpArr[buttonNumValue] = 'default' // give value to prevent fill of prev elements if they are empty
         tmpArr.splice(buttonNumValue, 1, textVal)
@@ -82,17 +101,23 @@ export default class PostsPanel extends Component {
         return (
             /* list of posts */
             <Fragment>
-            <div key='lkj' className='panel-header'>Posts Panel</div>
-            <div className='written-posts'>
-            {this.state.posts ? this.state.posts.map(item =>
-                <div key={item.post_id + 1}>
-                <div key={item.post_id}>
-                <span key={item.post_id}>{item.title}</span>
-                <span key='tttt'>{item.post_created}</span>
-                <button>Edit Post</button>
+            <div key='posts-panel-key' className='panel-header'>Posts Panel</div>
+            <div className='live-posts'>
+                <div className='div-posts-edit-flex-inner'>
+                    {this.state.posts ? this.state.posts.map(item => {
+                        return item.post_id === this.state.activePost ? <SinglePostFullSize key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} /> : <SinglePost key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} />
+                    }) : null}
+                {/* this.state.posts ? this.state.posts.map(item =>
+                    <div key={item.post_id} id={item.post_id} className='single-post'>
+                    <div key={item.post_id}>
+                    <span key={item.post_id}>{item.title}</span>
+                    <span key='tttt'>{item.post_created}</span>
+                    <button onClick={(e) => this.editParagraph(e)}>Edit Post</button>
+                    <button onClick={() => console.log('delete clicked')} className='warning'>Delete Post</button>
+                    </div>
+                    </div>
+                ) : null */}
                 </div>
-                </div>
-            ) : null}
             </div>
             <EditPostInState allState={this.state} editParagraph={this.editParagraph} handleChangeParagraph={this.handleChangeParagraph}/>
             <CreatePostBlock createPara={this.createPara} createCode={this.createCode} createImage={this.createImage} handleChangeParagraph={this.handleChangeParagraph} handleValChange={this.handleValChange}/>

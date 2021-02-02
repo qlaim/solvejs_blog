@@ -14,6 +14,7 @@ div#content-wrapper {
     contwrap;
 }
 div#page-wrapper {
+    display: grid;
     grid-area: pg-wrap;
     /* margin-top: 10px; */
 }
@@ -28,12 +29,11 @@ div#page-wrapper {
 
 #admin-panel {
     display: grid;
-    border: 4px solid black;
     grid-area: admin;
     grid-template-areas: 
     "admin-menu"
     "panel-header"
-    "written-posts"
+    "live-posts"
     "edit-new"
     "add-group "
     "post-create "
@@ -51,9 +51,16 @@ div#page-wrapper {
     display: grid;
     grid-area: edit-new;
 }
-.written-posts {
+.live-posts {
     display: grid;
-    grid-area: written-posts;
+    grid-area: live-posts;
+}
+.div-posts-edit-flex-inner {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
 }
 .add-post-group {
     display: grid;
