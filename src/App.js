@@ -132,7 +132,7 @@ export default class App extends Component {
         return (
             <Router>
             <Header loggedIn={this.state.data.loggedIn}/>
-            <div id="page-wrapper" style={{backgroundColor: 'red'}}>
+            <div id="page-wrapper">
             <Popup />
             <Switch>
                 <Route path='/' exact><Blog loggedIn={this.state.data.loggedIn}/></Route>

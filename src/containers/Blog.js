@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './BlogPostRender';
+import Card, {CardFull}  from './BlogPostRender';
 import Projects from '../components/Projects';
 import {postsFromFetchFile, postsFromFetchFile2} from '../db/posts';
 import path from 'path'
@@ -16,10 +16,11 @@ export default class Blog extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(event) {
+        console.log(Number(event.target.parentElement.parentElement.id), ' ... Blog.js')
     this.setState({
-        activeCardDivID: event.target.parentElement.parentElement.id
+        activeCardDivID: Number(event.target.parentElement.parentElement.id)
     });
-    console.log(event.target.parentElement.parentElement.id, 'id id id id id id', this.state.activeCardDivID, 'state state state ')
+    console.log(event.target.parentElement.parentElement.id, 'Blog.js id', this.state.activeCardDivID, 'Blog.js state')
     }
     componentDidMount() {
         fetch('http://localhost:3030/api/posts', {
@@ -44,7 +45,9 @@ export default class Blog extends Component {
                 <div id='card-posts' key={1}>
                     <h1>**blog componenent will show as cards until clicked; others will remain as cards and reposition &gt;&gt; challenge may be if user selects post in the middle; on click, card will open to post &gt;&gt; 'collapse post'
                     </h1>
-                    {this.state.postsDb.map((item, index) =>
+                    {this.state.postsDb.map((item, index) => Number(this.state.activeCardDivID) === item.post_id ? 
+                    <CardFull click={this.handleClick} key={item.post_id} id={item.post_id} activeCard={this.state.activeCardDivID} title={item.title} image={item.images} text={item.paragraphs} writer='James C Hardy, JavaScript | ReactJS | Express | PostgreSQL Web Developer' />
+                    :
                         <Card click={this.handleClick} key={item.post_id} id={item.post_id} activeCard={this.state.activeCardDivID} title={item.title} image={item.images} text={item.paragraphs} writer='James C Hardy, JavaScript | ReactJS | Express | PostgreSQL Web Developer' />
                     )}
                         {/* posts.map((item, index) =>

@@ -47,7 +47,7 @@ export default class PostsPanel extends Component {
     editParagraph(e, num) {
         // e.target.parentNode.parentNode.classList.toggle('single-post-max-size');
         console.log(e.target.innerText, e.target);
-        if(e.target.innerText === 'Edit Post') {
+        if(e.target.innerText === 'Edit') {
             this.setState({
                 activePost: num
             });
@@ -59,7 +59,7 @@ export default class PostsPanel extends Component {
                 activePost: 0
             });
             console.log(e.target.innerText);
-            e.target.innerText = 'Edit Post';
+            e.target.innerText = 'Edit';
             console.log(e.target.innerText);
         }
         // let eHold = e.target.parentNode.querySelector(name='textarea').innerText;
@@ -70,6 +70,20 @@ export default class PostsPanel extends Component {
         // });
         // console.log('should have updated state...')
     }
+    submitChange = (passed) => {
+        console.log(`changes should be submitted here for item ${passed}`);
+
+        // move changes to state >>> send to db if differences
+        // use intermediary state before committing
+
+        // pass in state item after updated
+
+        // check if any changes per state item
+
+        // pass changes to db
+
+        // update state
+    } 
     handleValChange = (e, num) => {
         // generic function for all onchange
     }
@@ -105,7 +119,8 @@ export default class PostsPanel extends Component {
             <div className='live-posts'>
                 <div className='div-posts-edit-flex-inner'>
                     {this.state.posts ? this.state.posts.map(item => {
-                        return item.post_id === this.state.activePost ? <SinglePostFullSize key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} /> : <SinglePost key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} />
+                        return item.post_id === this.state.activePost ? <div key={item.post_id} className='single-post-full'>
+                            <SinglePostFullSize key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} submit={() => this.submitChange(item)} /></div> : <SinglePost key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} />
                     }) : null}
                 {/* this.state.posts ? this.state.posts.map(item =>
                     <div key={item.post_id} id={item.post_id} className='single-post'>

@@ -1,25 +1,33 @@
-#root {
+/* body {
     display: grid;
-    grid-template-areas:
+    grid-template-areas: 
+    "root root root root root root";
+} */
+#root {
+  display: grid;
+  row-gap: 10px;
+  grid-area: root;
+  grid-template-areas:
     "head head head head head head head head head head head head"
     "contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap contwrap "
     "pg-wrap pg-wrap pg-wrap pg-wrap pg-wrap pg-wrap pg-wrap pg-wrap pg-wrap pg-wrap pg-wrap pg-wrap"
-    "admin admin admin admin admin admin admin admin admin admin admin admin "
-    "footer footer footer footer footer footer footer footer footer footer footer footer "
-    /* "pop pop pop pop pop pop pop pop pop pop pop " */
+    "admin admin admin admin admin admin admin admin admin admin admin admin"
+    "footer footer footer footer footer footer footer footer footer footer footer footer";
+  /* "pop pop pop pop pop pop pop pop pop pop pop " */
 }
 div#content-wrapper {
-    /* grid-template-columns: repeat(3, 1fr); */
-    grid-area: 
-    contwrap;
+  /* grid-template-columns: repeat(3, 1fr); */
+  display: grid;
+  grid-area: contwrap;
 }
 div#page-wrapper {
-    display: grid;
-    grid-area: pg-wrap;
-    /* margin-top: 10px; */
+  display: grid;
+  grid-area: pg-wrap;
+  /* margin-top: 10px; */
 }
 #header {
-    grid-area: head;
+  display: grid;
+  grid-area: head;
 }
 /* #nav-menu {
     grid-area: nav;
@@ -28,9 +36,8 @@ div#page-wrapper {
 /* Admin Panel begin */
 
 #admin-panel {
-    display: grid;
-    grid-area: admin;
-    grid-template-areas: 
+  grid-area: admin;
+  grid-template-areas:
     "admin-menu"
     "panel-header"
     "live-posts"
@@ -40,69 +47,73 @@ div#page-wrapper {
     "send-db";
 }
 #admin-menu {
-    display: grid;
-    grid-area: admin-menu;
+  display: grid;
+  grid-area: admin-menu;
 }
 #admin-menu-items {
-    display: flex;
-    margin-top: 5px;
+  display: flex;
+  margin-top: 5px;
 }
 .edit-new-post {
-    display: grid;
-    grid-area: edit-new;
+  display: grid;
+  grid-area: edit-new;
 }
 .live-posts {
-    display: grid;
-    grid-area: live-posts;
+  display: grid;
+  grid-area: live-posts;
 }
 .div-posts-edit-flex-inner {
-    margin-top: 5px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
 }
 .add-post-group {
-    display: grid;
-    grid-area: add-group;
-} 
+  display: grid;
+  grid-area: add-group;
+}
 .post-create {
-    display: grid;
-    grid-area: post-create;
-} 
+  display: grid;
+  grid-area: post-create;
+}
 #send-edit-state {
-    display: grid;
-    grid-area: send-db;
+  display: grid;
+  grid-area: send-db;
 }
 .panel-header {
-    display: grid;
-    grid-area: panel-header;
+  display: grid;
+  grid-area: panel-header;
 }
 
 /* Admin Panel end */
 
 #web-projects {
-    grid-area: webproj;
-    display: flex;
-    flex-wrap: wrap;
+  display: grid;
+  grid-area: webproj;
+  display: flex;
+  flex-wrap: wrap;
 }
 table.project {
-    display: grid;
-    margin-right: 10px;
-    align-content: stretch;
+  display: grid;
+  margin-right: 10px;
+  align-content: stretch;
 }
-#card-posts { /* flex to wrap when card and not when full */
-    display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
+#card-posts {
+  /* flex to wrap when card and not when full */
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
 }
 div#footer-menu {
-    grid-area: footer;
+  grid-area: footer;
 }
 /* "webproj webproj webproj webproj webproj webproj webproj webproj webproj webproj webproj webproj"
     "wpt wpt wpt wpt wpt wpt wpt wpt wpt wpt wpt wpt"
     "cp cp cp cp cp cp cp cp cp cp cp cp" */
 
 .popup {
-    grid-area: pop;
+  grid-area: pop;
 }

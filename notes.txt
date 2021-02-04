@@ -1,12 +1,13 @@
 currently work-in-progress before git push:
 
-----> git commit -m 'postspanel create SinglePost for each post > onclick for post edit button resize to full; Header remove 90px height in favor of auto to accommodate components following; styling post & edit buttons AdminPanel'
+----> git commit -m 'fix AdminPanel width via removal of "display:grid" on #admin-panel; add Number(activeid) to Blog to fix .full-size card resize; add # to scroll to selected post; updated styling Card;'
 
 CURRENT: PRIORITIZED 3:
 _________________________
 >>>>>> useraccesscheck result to works with adding directly to users router js file >> still want to get it working in its file
 
-MUST: 1. configure postgresql references to fs images
+MUST: 1. next -> SinglePostFullSize logic to show editable post; next -> delete post button logic
+---- configure postgresql references to fs images
 --- posts editing and posts creation from db strings;
 --- move ad images to directory for node js count
 --- update tables

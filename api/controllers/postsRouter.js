@@ -69,20 +69,20 @@ router.post('/create_post', (req, res, next) => {
         values: [ 
             '"New Blog Post Presented As A Test!"',
             '{"Express JS", "PostgreSQL"}',
-            `<p>
+            `&lt;p&gt;
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid voluptatibus modi tenetur 
-            <ul>
-                <li>Lorin ipsum dowe ajit.</li>
-                <li>Pirop dolor sit damet.</li>
-                <li>Kurem ipsum dolor amt.</li>
-            </ul>ad corporis deleniti quisquam esse in voluptas voluptatum earum libero illo tempore fugiat minima, saepe ullam architecto voluptatem.
-        </p>
-        <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum quae numquam tenetur <i>sunt nihil nisi dolorem at unde animi, a velit non sit enim aperiam </i> molestias totam suscipit aspernatur iusto!
-        </p>
-        <p>
-            Lorem, ipsum <strong>sit amet consectetur adipisicing elit. Delectus, labore! Porro, </strong> necessitatibus? Iste, enim aut magnam cum adipisci obcaecati, repellendus repellat ea id vero quo sapiente natus animi, quos a!
-        </p>`,
+            &lt;ul&gt;
+                &lt;li&gt;Lorin ipsum dowe ajit.&lt;&sol;li&gt;
+                &lt;li&gt;Pirop dolor sit damet.&lt;&sol;li&gt;
+                &lt;li&gt;Kurem ipsum dolor amt.&lt;&sol;li&gt;
+            &lt;&sol;ul&gt;ad corporis deleniti quisquam esse in voluptas voluptatum earum libero illo tempore fugiat minima, saepe ullam architecto voluptatem.
+        &lt;&sol;p&gt;
+        &lt;p&gt;
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum quae numquam tenetur &lt;i&gt;sunt nihil nisi dolorem at unde animi, a velit non sit enim aperiam &lt;&sol;i&gt; molestias totam suscipit aspernatur iusto!
+        &lt;&sol;p&gt;
+        &lt;p&gt;
+            Lorem, ipsum &lt;strong&gt;sit amet consectetur adipisicing elit. Delectus, labore! Porro, &lt;&sol;strong&gt; necessitatibus? Iste, enim aut magnam cum adipisci obcaecati, repellendus repellat ea id vero quo sapiente natus animi, quos a!
+        &lt;&sol;p&gt;`,
         '{"NOW"}',
         `{'../../db/images/wood.png'}`
         ]
