@@ -43,8 +43,6 @@ export default class Blog extends Component {
         return (/* need key for list - move to array */
             <div id="content-wrapper">
                 <div id='card-posts' key={1}>
-                    <h1>**blog componenent will show as cards until clicked; others will remain as cards and reposition &gt;&gt; challenge may be if user selects post in the middle; on click, card will open to post &gt;&gt; 'collapse post'
-                    </h1>
                     {this.state.postsDb.map((item, index) => Number(this.state.activeCardDivID) === item.post_id ? 
                     <CardFull click={this.handleClick} key={item.post_id} id={item.post_id} activeCard={this.state.activeCardDivID} title={item.title} image={item.images} text={item.paragraphs} writer='James C Hardy, JavaScript | ReactJS | Express | PostgreSQL Web Developer' />
                     :

@@ -1,6 +1,7 @@
 import React, { Component, Fragment, useState } from 'react';
-import hocPost from './hocPost';
-import SinglePost, {SinglePostFullSize} from '../../components/SinglePost';
+import HocPost from './HocPost';
+import EditSinglePost, {EditSinglePostFullSize} from '../../components/EditSinglePost';
+import {hocElement} from '../../components/EditCodePrompt';
 
 export default class PostsPanel extends Component {
     constructor(props) {
@@ -103,7 +104,12 @@ export default class PostsPanel extends Component {
 
     }
     createImage() {
-        return <Images />
+        return (
+            <>
+        <Images />
+        'CreateImages'
+            </>
+        )
     }
     sendState = () => {
         console.log('this will send state to database to be pulled to state in APP')
@@ -120,7 +126,7 @@ export default class PostsPanel extends Component {
                 <div className='div-posts-edit-flex-inner'>
                     {this.state.posts ? this.state.posts.map(item => {
                         return item.post_id === this.state.activePost ? <div key={item.post_id} className='single-post-full'>
-                            <SinglePostFullSize key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} submit={() => this.submitChange(item)} /></div> : <SinglePost key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} />
+                            <EditSinglePostFullSize key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} submit={() => this.submitChange(item)} /></div> : <EditSinglePost key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} />
                     }) : null}
                 {/* this.state.posts ? this.state.posts.map(item =>
                     <div key={item.post_id} id={item.post_id} className='single-post'>
@@ -134,7 +140,6 @@ export default class PostsPanel extends Component {
                 ) : null */}
                 </div>
             </div>
-            <EditPostInState allState={this.state} editParagraph={this.editParagraph} handleChangeParagraph={this.handleChangeParagraph}/>
             <CreatePostBlock createPara={this.createPara} createCode={this.createCode} createImage={this.createImage} handleChangeParagraph={this.handleChangeParagraph} handleValChange={this.handleValChange}/>
             <SendToDB sendState={this.sendState}/>
             </Fragment>
@@ -142,22 +147,23 @@ export default class PostsPanel extends Component {
         )
     }
 }
-const Holder = hocPost(TextBlock);
+const Holder = HocPost(TextBlock);
 
-function EditPostInState(props) {
+function CreateNewPost(props) { /* replace in favor of another */
         return <div className='edit-new-post'>
         {props.allState.paragraphs ? 
-        props.allState.paragraphs.map((item, index) => <div key={index} className='one-post-admin'><textarea rows='auto' cols='100' defaultValue={item} onChange={(e) =>props.handleChangeParagraph(e)}></textarea><button type='button' onClick={(e) => props.editParagraph(e, index)}>Replace Paragraph @ Index: {index}</button></div>) : []}
+        props.allState.paragraphs.map((item, index) => 
+        <div key={index} className='one-post-admin'>
+            <div contentEditable onChange={(e) =>props.handleChangeParagraph(e)}>{item + ' <<<< CreateNewPost'}
+            <CodeBlock handleValChange={props.handleValChange}/>
+            </div>
+        <button type='button' onClick={(e) => props.editParagraph(e, index)}>Replace Paragraph @ Index: {index}</button></div>) : []}
         </div> 
     }
 function CreatePostBlock(props) {
-    return (
-        <div className='add-post-group'>
-        {}
-        <form action=''>
-        <label htmlFor='title'>CreatePostBlock CreatePostBlock</label>
-        <input type='button' value="placeholder-CreatePostBlock" />
-        </form>
+    return ( /* remove this in favor of other */
+        <div className='add-post-group'>======CreatePostBlock
+        <button onClick={() => props.createCode()}>CodeBlock</button>
         <TextBlock createPara={props.createPara} handleValChange={props.handleValChange}/>
         </div>
     )
@@ -165,12 +171,8 @@ function CreatePostBlock(props) {
 function TextBlock(props) {
     return (
         <div className='post-create'>
-        <form action='' name='text-block' onChange={props.handleChangeParagraph}>
-        <label htmlFor='paragraph'>Enter Paragraph</label><textarea cols='100%' rows='auto' name='paragraph'></textarea>
-        <input type='button' onClick={(e) => props.createPara(e)} value='Send: State & sessionStorage' />
-        </form>
         <Images />
-        <CodeBlock handleValChange={props.handleValChange}/>
+        ======TextBlock
         </div>
     )
 }
@@ -182,11 +184,9 @@ function Images(props) {
 }
 
 function CodeBlock(props) {
-    return <div className='code-block'>
-    <form onChange={props.handleValChange} onSubmit={props.handleValChange}>
-    <textarea defaultValue='CodeBlock CodeBlock'></textarea>
-    <button type='button'>Code To State</button>
-    </form>
+    return <div id='new-post' className='code-block'>
+    <button type='button' onClick={() => hocElement('li')}>li</button>
+    <button type='button' onClick={() => hocElement('p')}>p</button>
     </div>
 }
 

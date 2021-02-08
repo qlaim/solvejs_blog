@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import {EditCodePrompt} from './EditCodePrompt';
+import {hocElement, hocElementSelfClosing} from './EditCodePrompt';
 
-export default function SinglePost(props) {
+export default function EditSinglePost(props) {
     return (
         <div key={props.item.post_id} id={props.item.post_id} className='single-post'>
             <div key={props.item.post_id}>
                 <div key={props.item.post_id}>{props.item.title}</div>
-                <span key='tttt'>{props.item.post_created}</span>
+                <span key='tttt'>{'Created: ' + new Date(props.item.post_created).toLocaleDateString()}</span>
                 <div>
                 <button className='edit-button' onClick={(e) => props.editParagraph(e, props.item.post_id)}>Edit</button>
                 </div>
@@ -14,7 +16,7 @@ export default function SinglePost(props) {
     )
 }
 
-function SinglePostFullSize(props) {
+function EditSinglePostFullSize(props) {
     const [post,setPost] = useState(props.item);
     function sendFinalToDatabase() {
         const {post_id, paragraphs} = props.item;
@@ -23,8 +25,9 @@ function SinglePostFullSize(props) {
     return (
         <div key={props.item.post_id} id={props.item.post_id} className='single-post-max-size'>
             {/* <div key={props.item.post_id}> */}
+            <EditCodePrompt />
                 <div key={props.item.post_id}>{props.item.title}</div>
-                <span key='tttt'>{props.item.post_created}</span>
+                <span key='tttt'>{'Created: ' + new Date(props.item.post_created).toLocaleDateString()}</span>
                 <div>
                 <textarea defaultValue={props.item.paragraphs} />
                 </div>
@@ -39,4 +42,4 @@ function SinglePostFullSize(props) {
     )
 }
 
-export {SinglePostFullSize};
+export {EditSinglePostFullSize};

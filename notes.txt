@@ -1,13 +1,14 @@
 currently work-in-progress before git push:
 
-----> git commit -m 'fix AdminPanel width via removal of "display:grid" on #admin-panel; add Number(activeid) to Blog to fix .full-size card resize; add # to scroll to selected post; updated styling Card;'
+----> git commit -m 'create hocElement for elem creation PostsPanel; create EditCodePrompt for editig posts; still working on logic for SinglePostFullSize;'
+
 
 CURRENT: PRIORITIZED 3:
+next -> SinglePostFullSize logic to show editable post; next -> delete post button logic; 
 _________________________
 >>>>>> useraccesscheck result to works with adding directly to users router js file >> still want to get it working in its file
 
-MUST: 1. next -> SinglePostFullSize logic to show editable post; next -> delete post button logic
----- configure postgresql references to fs images
+MUST: 1. configure postgresql references to fs images
 --- posts editing and posts creation from db strings;
 --- move ad images to directory for node js count
 --- update tables
@@ -25,28 +26,35 @@ change for new PK ===> Foreign-key constraints:
 --- comments area login prompt (set timeout check on page reentry - does not logout if computer sleep)
 ----- facebook & twitter integration
 
-OTHERS CURRENT NOT URGENT:
-__________________________
+||||||||||||||||||||||||||||||
+    Open not urgent:
+||||||||||||||||||||||||||||||
 
-- my conventions > CONST, file_names, css-properties, html-values,
+######
+###### general
+######
+- update my conventions > CONST, file_names, css-properties, html-values, db_variables
 - install morgan logger
 - later: change input fields react to stream with server to change to green if name avail on server
 - suppress SQL errors to FE;
 - post > click event on featured image and title
 - images connect
---- file count images for array random ad
+######
+###### ads
+######
+- file count images for array random ad
+- adgen > working on generating demo ad from array.length and random based on 2 course categories (javascript and full-stack)
+- ad > fix random showing of 2 or 3 images
+######
+###### site
+######
+- componentWillUnmount > locate unmounted
 - add story to website
 --- spice up natural language and effects
 --- add email form > integrate smtp
-- done: WEBPACK >>> separate dev and password
-
-OTHERS NON-CURRENT NOT URGENT:
-______________________________
-
+- email newsletter implementation
 - database and .env backup plan
-- adgen > working on generating demo ad from array.length and random based on 2 course categories (javascript and full-stack)
 - projects page
-- ad > fix random showing of 2 or 3 images
 - popup > reposition to middle
 - new content on solvejs blog
 - refactor topic bumpers.solvejs js-related
@@ -56,8 +64,9 @@ ______________________________
 
 ==========================================
 ==========================================
-layout:
-
+######
+###### layout
+######
 - logged in state > App
 - name with developer on blog posts
 - header

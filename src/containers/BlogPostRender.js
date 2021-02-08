@@ -50,7 +50,7 @@ export default class Card extends Component {
                     <h1 className='title' id={this.props.id+'null'} onClick={this.props.click} ><a href={'#'+this.props.id/* replaceSpace item.title.replace(/ /g, '-') */ }>{this.props.title}</a>
 </h1>                    <span className='author-bio'>{this.props.writer}</span>
                     {/* <a href={replaceSpace item.title.replace(/ /g, '-') </div>}><img className='featured-image' src={this.props.image} width='60px' alt='image did not load' onClick={this.props.click} /></a> */}
-                    <div className='blog-text'>{this.props.text}</div>
+                    <div className='blog-text' dangerouslySetInnerHTML={{__html: this.props.text}}></div>
                     
                 </div>)
     }
@@ -61,7 +61,7 @@ export function CardFull(props) {
                 <h1 className='title' id={props.id+'null'} onClick={props.click} ><a href={'#'+props.id /* replaceSpace item.title.replace(/ /g, '-') */}>{props.title} </a></h1>
                 <span className='author-bio'>{props.writer}</span>
                 {/* <a href={replaceSpace item.title.replace(/ /g, '-') </div>}><img className='featured-image' src={props.image} width='60px' alt='image did not load' onClick={props.click} /></a> */}
-                <div className='blog-text'>{props.text}</div>
+                <div className='blog-text' dangerouslySetInnerHTML={{__html: props.text}}></div>
                 
             </div>)
 }
