@@ -1,10 +1,9 @@
 currently work-in-progress before git push:
 
-----> git commit -m 'create hocElement for elem creation PostsPanel; create EditCodePrompt for editig posts; still working on logic for SinglePostFullSize;'
+----> git commit -m 'withPostCreate HOC for edit / create posts; PostsPanel toggle show/hide liveposts; next -> CreatePostBlock new post to SQL; next -> SinglePostFullSize logic to show editable post; next -> delete post button logic; 
 
 
 CURRENT: PRIORITIZED 3:
-next -> SinglePostFullSize logic to show editable post; next -> delete post button logic; 
 _________________________
 >>>>>> useraccesscheck result to works with adding directly to users router js file >> still want to get it working in its file
 

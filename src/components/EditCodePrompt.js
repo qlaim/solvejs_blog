@@ -24,7 +24,7 @@ export function hocElement(elem, elClass) {
     let attr = document.createAttribute('contentEditable');
     let newElem = document.createElement(elem);
     // let newElem = `<${elem + (elClass ? className=elClass : '')}> </${elem}>`
-    newElem.setAttribute('contentEditable', true);        
+    newElem.setAttribute('contentEditable', true);     
     return (
         <div>
         {editElem.appendChild(newElem)}

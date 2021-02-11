@@ -1,18 +1,20 @@
 import React, { Component, Fragment, useState } from 'react';
-import HocPost from './HocPost';
+import CreateNewPost from './Posts/CreateNewPost';
 import EditSinglePost, {EditSinglePostFullSize} from '../../components/EditSinglePost';
 import {hocElement} from '../../components/EditCodePrompt';
+import { render } from 'react-dom';
 
 export default class PostsPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            showLivePosts: false,
             ready: false, // use to prevent render from database
             // need if statement at Blog
             // need false in db, also
             // will also need to move all code to individual posts
             posts: [],
-            activePost: 76,
+            activePost: -1,
             tmpParagraphs: ['**sessionStorage FOR TEMP IN CASE OF REFRESH', '**BUTTON: SEND TO DATABASE', '**EDIT BUTTON THAT UPDATES STATE INDEX ON SEND'],
             paragraphs: ['**sessionStorage FOR TEMP IN CASE OF REFRESH', '**BUTTON: SEND TO DATABASE', '**EDIT BUTTON THAT UPDATES STATE INDEX ON SEND'],
             tmpCode: [],
@@ -20,12 +22,17 @@ export default class PostsPanel extends Component {
             images: []
         }
         this.pullPostTitles = this.pullPostTitles.bind(this);
-        this.createCode = this.createCode.bind(this);
         this.createImage = this.createImage.bind(this);
         this.createPara = this.createPara.bind(this);
         this.editParagraph = this.editParagraph.bind(this);
         this.handleChangeParagraph = this.handleChangeParagraph.bind(this);
         this.handleValChange = this.handleValChange.bind(this);
+        // this.toggleShowLivePosts = this.toggleShowLivePosts.bind(this);
+    }
+    toggleShowLivePosts = () => {
+        this.setState(prevState => ({
+            showLivePosts: !prevState.showLivePosts
+        }))
     }
     pullPostTitles() {
         fetch('http://localhost:3030/api/posts')
@@ -43,7 +50,6 @@ export default class PostsPanel extends Component {
         this.setState(prevState =>({
             paragraphs: prevState.paragraphs.concat(e.target.parentNode.children[1].value)
         }));
-        {/* <TextBlock handleChangeParagraph={handleChangeParagraph}/> */} 
     }
     editParagraph(e, num) {
         // e.target.parentNode.parentNode.classList.toggle('single-post-max-size');
@@ -63,13 +69,6 @@ export default class PostsPanel extends Component {
             e.target.innerText = 'Edit';
             console.log(e.target.innerText);
         }
-        // let eHold = e.target.parentNode.querySelector(name='textarea').innerText;
-        // let tmpArr = [...this.state.paragraphs];
-        // tmpArr.splice(num, 1, this.state.tmpParagraphs[num]);
-        // this.setState({
-        //      paragraphs: tmpArr
-        // });
-        // console.log('should have updated state...')
     }
     submitChange = (passed) => {
         console.log(`changes should be submitted here for item ${passed}`);
@@ -99,10 +98,7 @@ export default class PostsPanel extends Component {
             tmpParagraphs: tmpArr // set state after splice tmpArr
         }))
     }
-    createCode() {
-        return <CodeBlock />
-
-    }
+    
     createImage() {
         return (
             <>
@@ -123,7 +119,8 @@ export default class PostsPanel extends Component {
             <Fragment>
             <div key='posts-panel-key' className='panel-header'>Posts Panel</div>
             <div className='live-posts'>
-                <div className='div-posts-edit-flex-inner'>
+                <button onClick={this.toggleShowLivePosts} value={this.state.showLivePosts ? 'Hide Live Posts' : 'Show Live Posts'}>uuu</button>
+                <div className='div-posts-edit-flex-inner' style={{display: this.state.showLivePosts ? 'block': 'none'}}>
                     {this.state.posts ? this.state.posts.map(item => {
                         return item.post_id === this.state.activePost ? <div key={item.post_id} className='single-post-full'>
                             <EditSinglePostFullSize key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} submit={() => this.submitChange(item)} /></div> : <EditSinglePost key={item.post_id} item={item} editParagraph={(e) => this.editParagraph(e, item.post_id)} />
@@ -140,41 +137,12 @@ export default class PostsPanel extends Component {
                 ) : null */}
                 </div>
             </div>
-            <CreatePostBlock createPara={this.createPara} createCode={this.createCode} createImage={this.createImage} handleChangeParagraph={this.handleChangeParagraph} handleValChange={this.handleValChange}/>
+            <CreateNewPost test={this.state.tmpParagraphs}/>
             <SendToDB sendState={this.sendState}/>
             </Fragment>
             /* list of posts */
         )
     }
-}
-const Holder = HocPost(TextBlock);
-
-function CreateNewPost(props) { /* replace in favor of another */
-        return <div className='edit-new-post'>
-        {props.allState.paragraphs ? 
-        props.allState.paragraphs.map((item, index) => 
-        <div key={index} className='one-post-admin'>
-            <div contentEditable onChange={(e) =>props.handleChangeParagraph(e)}>{item + ' <<<< CreateNewPost'}
-            <CodeBlock handleValChange={props.handleValChange}/>
-            </div>
-        <button type='button' onClick={(e) => props.editParagraph(e, index)}>Replace Paragraph @ Index: {index}</button></div>) : []}
-        </div> 
-    }
-function CreatePostBlock(props) {
-    return ( /* remove this in favor of other */
-        <div className='add-post-group'>======CreatePostBlock
-        <button onClick={() => props.createCode()}>CodeBlock</button>
-        <TextBlock createPara={props.createPara} handleValChange={props.handleValChange}/>
-        </div>
-    )
-}
-function TextBlock(props) {
-    return (
-        <div className='post-create'>
-        <Images />
-        ======TextBlock
-        </div>
-    )
 }
 
 function Images(props) {
@@ -183,12 +151,8 @@ function Images(props) {
     )
 }
 
-function CodeBlock(props) {
-    return <div id='new-post' className='code-block'>
-    <button type='button' onClick={() => hocElement('li')}>li</button>
-    <button type='button' onClick={() => hocElement('p')}>p</button>
-    </div>
-}
+
+
 
 function GenerateChild(props) {
     return 'GenerateChild GenerateChild'
